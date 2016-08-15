@@ -15,7 +15,7 @@ export default class Sort extends React.Component {
 
     sortUp(){
     	let filteredArr = this.props.data.filteredArr.sort( (a,b) => {
-    		return a.last_name > b.last_name;
+    		return a.last_name.toLowerCase() > b.last_name.toLowerCase();
     	});
 
     	this.props.newState({
@@ -26,7 +26,7 @@ export default class Sort extends React.Component {
 
     sortDown(){
     	let filteredArr = this.props.data.filteredArr.sort( (a,b) => {
-    		return a.last_name < b.last_name;
+    		return a.last_name.toLowerCase() < b.last_name.toLowerCase();
     	});
 
     	this.props.newState({
