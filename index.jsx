@@ -6,10 +6,8 @@ import Table from './src/myTable';
 import Profile from './src/profile';
 import Search from './src/search';
 import Sort from './src/sort';
-import {API} from './src/utils/constants';
 
 class App extends React.Component {
-    //Определяем конструктор нашего класса! super всегда.
     constructor(props) {
         super(props)
         this.state = {
@@ -22,13 +20,11 @@ class App extends React.Component {
                 avatar: ""
             },
             filteredArr: [],
+            pagination: {}
         }
     }
 
-    //Метод fetchProfile делает запрос на github api
-    // и записывает в состояние наш объект 
     fetchUrl() {
-        let url = `${API}`;
         fetch('http://dselkirk.getsandbox.com/users')
             .then((res) => res.json() )
             .then((data) => {
@@ -43,8 +39,6 @@ class App extends React.Component {
             })
     }
 
-    // Вызывается один раз, только на клиенте (не на сервере), 
-    // сразу же после того, как происходит инициализация рендеринга.
     componentWillMount() {
         this.fetchUrl();
     }
@@ -63,11 +57,11 @@ class App extends React.Component {
                     <div className="control">
                         <Search data={this.state} newState={this.newState.bind( this )} />
                         <Sort data={this.state} newState={this.newState.bind( this )} />
+                        <Profile data={this.state.robot} />
                     </div>
 
                     <div onClick={this.selectRobot.bind( this )}>
                         <Table data={this.state.filteredArr} />
-                        <Profile data={this.state.robot} />
                     </div>
                 </div>
             );
